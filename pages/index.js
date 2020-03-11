@@ -1,5 +1,4 @@
 import fetch from 'node-fetch'
-
 class Search extends React.Component {
   constructor(props) {
     super(props)
@@ -11,8 +10,9 @@ class Search extends React.Component {
     }
   }
   async search() {
+    console.log(process.env.BACK_LINK)
     if(this.state.search.length < 3) return
-      const res = await fetch(`http://localhost/candid/suggest.php?search=${this.state.search}`)
+      const res = await fetch(`${process.env.BACK_LINK}/suggest.php?search=${this.state.search}`)
       const funders = await res.json()
       this.setState({suggests : funders})
   }
@@ -22,7 +22,7 @@ class Search extends React.Component {
     this.search()
   }
   async getResult(event) {
-      const res = await fetch(`http://localhost/candid/suggest.php?search=${this.state.search}`)
+      const res = await fetch(`${process.env.BACK_LINK}/suggest.php?search=${this.state.search}`)
       const funders = await res.json()
       this.setState({results : funders})
   }
